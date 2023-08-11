@@ -1,0 +1,7 @@
+---------------------------------------------------------------------------------------------------
+Version: 1.0.0
+Date: 2023-08-10
+
+  Features:
+    - prototypes/animation_db
+    - prototypes/teamcolor_manager
