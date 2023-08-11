@@ -14,7 +14,6 @@ AnimationDB.data = {}
 --- Construct basic layered animations
 ---
 function AnimationDB.get_layered_animations(entity_type, name, animation_type, unit_scale)
-    log(entity_type .. '/' .. name .. '/' .. animation_type)
     return {
         layers = {
             AnimationDB.get_main_animation(entity_type, name, animation_type, unit_scale),
