@@ -3,7 +3,7 @@
 --- Created by heyqule.
 --- DateTime: 8/10/2023 5:48 PM
 ---
-local AnimationDB = require('__erm_zerg_hd_assets__/animation_db')
+local AnimationDB = require('__erm_libs__/prototypes/animation_db')
 local String = require('__stdlib__/stdlib/utils/string')
 
 local TeamColorManager = {}
