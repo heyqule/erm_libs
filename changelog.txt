@@ -1,4 +1,15 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.0.3
+Date: 2023-08-12
+
+  Changes:
+    - Add change_frame_count() to animation_db.
+
+  Bugfixes:
+    - fixed apply_runtime_tint not apply correctly.
+    - fixed animation scale used incorrect attribute name.
+
+---------------------------------------------------------------------------------------------------
 Version: 1.0.2
 Date: 2023-08-12
 

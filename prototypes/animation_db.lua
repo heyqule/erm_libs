@@ -62,7 +62,7 @@ end
 function AnimationDB.get_main_animation(entity_type, name, animation_type, unit_scale)
     local animation = util.table.deepcopy(AnimationDB.data[entity_type][name][animation_type]['main'])
     if unit_scale then
-        animation.unit_scale = unit_scale
+        animation.scale = unit_scale
     end
     return animation
 end
@@ -84,7 +84,7 @@ function AnimationDB.get_glow_mask_animation(entity_type, name, animation_type, 
         local animation = util.table.deepcopy(AnimationDB.data[entity_type][name][animation_type]['glow'])
         animation['draw_as_glow'] = true
         if unit_scale then
-            animation.unit_scale = unit_scale
+            animation.scale = unit_scale
         end
         return animation
     end
@@ -97,7 +97,7 @@ function AnimationDB.get_effect_mask_animation(entity_type, name, animation_type
     if AnimationDB.data[entity_type][name][animation_type]['effect'] then
         local animation = util.table.deepcopy(AnimationDB.data[entity_type][name][animation_type]['effect'])
         if unit_scale then
-            animation.unit_scale = unit_scale
+            animation.scale = unit_scale
         end
         return animation
     end
@@ -110,7 +110,7 @@ function AnimationDB.get_light_mask_animation(entity_type, name, animation_type,
     if AnimationDB.data[entity_type][name][animation_type]['light'] then
         local animation = util.table.deepcopy(AnimationDB.data[entity_type][name][animation_type]['light'])
         if unit_scale then
-            animation.unit_scale = unit_scale
+            animation.scale = unit_scale
         end
         animation['draw_as_light'] = true
         return animation
@@ -124,7 +124,7 @@ function AnimationDB.get_team_mask_animation(entity_type, name, animation_type, 
     if AnimationDB.data[entity_type][name][animation_type]['team'] then
         local animation = util.table.deepcopy(AnimationDB.data[entity_type][name][animation_type]['team'])
         if unit_scale then
-            animation.unit_scale = unit_scale
+            animation.scale = unit_scale
         end
         return animation
     end
@@ -160,11 +160,11 @@ function AnimationDB.apply_runtime_tint(animation_data, runtime_tint)
             if (animation_node.filename and string.find( animation_node.filename, '_teamcolour') ~= nil) or
                 (animation_node.filenames and string.find( animation_node.filenames[1], '_teamcolour') ~= nil) or
                 (animation_node.stripes and string.find( animation_node.stripes[1].filename, '_teamcolour') ~= nil) then
-            end
-            if runtime_tint then
-                animation_data['layers'][index]['apply_runtime_tint'] = true
-            else
-                animation_data['layers'][index]['apply_runtime_tint'] = false
+                if runtime_tint then
+                    animation_data['layers'][index]['apply_runtime_tint'] = true
+                else
+                    animation_data['layers'][index]['apply_runtime_tint'] = false
+                end
             end
         end
     end
@@ -179,6 +179,18 @@ function AnimationDB.change_animation_speed(animation_data, speed)
         end
     elseif animation_data['animation_speed'] then
         animation_data['animation_speed'] = speed
+    end
+
+    return animation_data
+end
+
+function AnimationDB.change_frame_count(animation_data, frame_count)
+    if animation_data['layers'] then
+        for index, _ in pairs(animation_data['layers']) do
+            animation_data['layers'][index]['animation_speed'] = frame_count
+        end
+    elseif animation_data['animation_speed'] then
+        animation_data['animation_speed'] = frame_count
     end
 
     return animation_data
