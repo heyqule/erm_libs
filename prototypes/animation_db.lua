@@ -13,17 +13,27 @@ AnimationDB.data = {}
 ---
 --- Construct basic layered animations
 ---
-function AnimationDB.get_layered_animations(entity_type, name, animation_type, unit_scale)
-    return {
+function AnimationDB.get_layered_animations(entity_type, name, animation_type, unit_scale, draw_light)
+    draw_light = draw_light or true
+
+    local animation = {
         layers = {
             AnimationDB.get_main_animation(entity_type, name, animation_type, unit_scale),
             AnimationDB.get_shadow_animation(entity_type, name, animation_type, unit_scale),
             AnimationDB.get_team_mask_animation(entity_type, name, animation_type, unit_scale),
             AnimationDB.get_glow_mask_animation(entity_type, name, animation_type, unit_scale),
             AnimationDB.get_effect_mask_animation(entity_type, name, animation_type, unit_scale),
-            AnimationDB.get_light_mask_animation(entity_type, name, animation_type, unit_scale),
         }
     }
+
+    if draw_light then
+        local lightLayer = AnimationDB.get_light_mask_animation(entity_type, name, animation_type, unit_scale)
+        if lightLayer then
+            table.insert(animation['layers'], lightLayer)
+        end
+    end
+
+    return animation
 end
 
 local subtypes = {
@@ -34,10 +44,10 @@ local subtypes = {
         return AnimationDB.get_shadow_animation(entity_type, name, animation_type, unit_scale)
     end,
     glow = function(entity_type, name, animation_type, unit_scale)
-        return AnimationDB.get_glow_animation(entity_type, name, animation_type, unit_scale)
+        return AnimationDB.get_glow_mask_animation(entity_type, name, animation_type, unit_scale)
     end,
     effect = function(entity_type, name, animation_type, unit_scale)
-        return AnimationDB.get_effect_animation(entity_type, name, animation_type, unit_scale)
+        return AnimationDB.get_effect_mask_animation(entity_type, name, animation_type, unit_scale)
     end,
     light = function(entity_type, name, animation_type, unit_scale)
         return AnimationDB.get_light_mask_animation(entity_type, name, animation_type, unit_scale)
@@ -60,11 +70,13 @@ function AnimationDB.get_single_animation(entity_type, name, animation_type, sub
 end
 
 function AnimationDB.get_main_animation(entity_type, name, animation_type, unit_scale)
-    local animation = util.table.deepcopy(AnimationDB.data[entity_type][name][animation_type]['main'])
-    if unit_scale then
-        animation.scale = unit_scale
+    if AnimationDB.data[entity_type][name][animation_type]['main'] then
+        local animation = util.table.deepcopy(AnimationDB.data[entity_type][name][animation_type]['main'])
+        if unit_scale then
+            animation.scale = unit_scale
+        end
+        return animation
     end
-    return animation
 end
 
 function AnimationDB.get_shadow_animation(entity_type, name, animation_type, unit_scale)
@@ -194,6 +206,18 @@ function AnimationDB.change_frame_count(animation_data, frame_count)
     end
 
     return animation_data
+end
+
+function AnimationDB.change_scale(animation_data, unit_scale)
+    if animation_data['layers'] then
+        for index, _ in pairs(animation_data['layers']) do
+            animation_data['layers'][index]['scale'] = unit_scale
+        end
+    elseif animation_data['animation_speed'] then
+        animation_data['scale'] = unit_scale
+    end
+
+    return animation_data;
 end
 
 return AnimationDB;
