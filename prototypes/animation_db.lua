@@ -81,9 +81,12 @@ end
 
 function AnimationDB.get_shadow_animation(entity_type, name, animation_type, unit_scale)
     if AnimationDB.data[entity_type][name][animation_type]['shadow'] then
-        local animation = AnimationDB.get_main_animation(entity_type, name, animation_type, unit_scale)
+        local animation  = AnimationDB.data[entity_type][name][animation_type]['shadow']
+        if animation['frame_count'] == nil then
+            animation = AnimationDB.get_main_animation(entity_type, name, animation_type, unit_scale)
+            animation['shift'] = util.table.deepcopy(AnimationDB.data[entity_type][name][animation_type]['shadow']['shift'])
+        end
         animation['draw_as_shadow'] = true
-        animation['shift'] = util.table.deepcopy(AnimationDB.data[entity_type][name][animation_type]['shadow']['shift'])
         return animation
     end
 end

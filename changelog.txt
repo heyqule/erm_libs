@@ -1,28 +1,35 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.0.5
+Date: 2023-08-??
+
+  Changes:
+    - Added support for custom shadow map.  [AnimationDB]
+
+---------------------------------------------------------------------------------------------------
 Version: 1.0.4
 Date: 2023-08-19
 
   Bugfixes:
-    - Fixed glow and effect from get_single_animation calling incorrect function.
-    - Fixed a crash if "main" animation does not exists.
+    - Fixed glow and effect from get_single_animation calling incorrect function.  [AnimationDB]
+    - Fixed a crash if "main" animation does not exists.  [AnimationDB]
 
 ---------------------------------------------------------------------------------------------------
 Version: 1.0.3
 Date: 2023-08-14
 
   Changes:
-    - Add change_frame_count() to animation_db.
+    - Add change_frame_count(). [AnimationDB]
 
   Bugfixes:
-    - fixed apply_runtime_tint not apply correctly.
-    - fixed animation scale used incorrect attribute name.
+    - fixed apply_runtime_tint not apply correctly. [AnimationDB]
+    - fixed animation scale used incorrect attribute name. [AnimationDB]
 
 ---------------------------------------------------------------------------------------------------
 Version: 1.0.2
 Date: 2023-08-12
 
   Bugfixes:
-    - Fixed prototypes/teamcolor_manager required an incorrect animation_db class.
+    - Fixed prototypes/teamcolor_manager required an incorrect animation_db class. [AnimationDB]
 
 ---------------------------------------------------------------------------------------------------
 Version: 1.0.1
