@@ -223,4 +223,25 @@ function AnimationDB.change_scale(animation_data, unit_scale)
     return animation_data;
 end
 
+local adjust_shift = function(shift, new_shift)
+    if shift then
+        shift = {shift[1]+new_shift[1], shift[2]+new_shift[2]}
+    else
+        shift = new_shift
+    end
+    return shift
+end
+
+function AnimationDB.shift(animation_data, shift_vector)
+    if animation_data['layers'] then
+        for index, _ in pairs(animation_data['layers']) do
+            animation_data['layers'][index]['shift'] = adjust_shift(animation_data['layers'][index]['shift'], shift_vector)
+        end
+    elseif animation_data['animation_speed'] then
+        animation_data['shift'] = adjust_shift(animation_data['shift'], shift_vector)
+    end
+
+    return animation_data;
+end
+
 return AnimationDB;

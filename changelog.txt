@@ -4,6 +4,7 @@ Date: 2023-08-??
 
   Changes:
     - Added support for custom shadow map.  [AnimationDB]
+    - Added shift() to shift animations.  [AnimationDB]
 
 ---------------------------------------------------------------------------------------------------
 Version: 1.0.4
