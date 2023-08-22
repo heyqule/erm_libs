@@ -211,13 +211,21 @@ function AnimationDB.change_frame_count(animation_data, frame_count)
     return animation_data
 end
 
-function AnimationDB.change_scale(animation_data, unit_scale)
+function AnimationDB.change_scale(animation_data, unit_scale, relative_scale)
     if animation_data['layers'] then
         for index, _ in pairs(animation_data['layers']) do
-            animation_data['layers'][index]['scale'] = unit_scale
+            if relative_scale then
+                animation_data['layers'][index]['scale'] = animation_data['layers'][index]['scale'] * unit_scale
+            else
+                animation_data['layers'][index]['scale'] = unit_scale
+            end
         end
-    elseif animation_data['animation_speed'] then
-        animation_data['scale'] = unit_scale
+    elseif animation_data['scale'] then
+        if relative_scale then
+            animation_data['scale'] = animation_data['scale'] * unit_scale
+        else
+            animation_data['scale'] = unit_scale
+        end
     end
 
     return animation_data;
