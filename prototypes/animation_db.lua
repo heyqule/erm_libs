@@ -214,14 +214,14 @@ end
 function AnimationDB.change_scale(animation_data, unit_scale, relative_scale)
     if animation_data['layers'] then
         for index, _ in pairs(animation_data['layers']) do
-            if relative_scale then
+            if relative_scale and animation_data['layers'][index]['scale'] then
                 animation_data['layers'][index]['scale'] = animation_data['layers'][index]['scale'] * unit_scale
             else
                 animation_data['layers'][index]['scale'] = unit_scale
             end
         end
     elseif animation_data['scale'] then
-        if relative_scale then
+        if relative_scale and animation_data['scale'] then
             animation_data['scale'] = animation_data['scale'] * unit_scale
         else
             animation_data['scale'] = unit_scale
