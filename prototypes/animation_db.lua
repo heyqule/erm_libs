@@ -16,7 +16,7 @@ AnimationDB.data = {}
 function AnimationDB.get_layered_animations(entity_type, name, animation_type, unit_scale, draw_light)
     draw_light = draw_light or true
 
-    local animation = {
+    local animations = {
         layers = {
             AnimationDB.get_main_animation(entity_type, name, animation_type, unit_scale),
             AnimationDB.get_shadow_animation(entity_type, name, animation_type, unit_scale),
@@ -29,11 +29,19 @@ function AnimationDB.get_layered_animations(entity_type, name, animation_type, u
     if draw_light then
         local lightLayer = AnimationDB.get_light_mask_animation(entity_type, name, animation_type, unit_scale)
         if lightLayer then
-            table.insert(animation['layers'], lightLayer)
+            table.insert(animations['layers'], lightLayer)
         end
     end
 
-    return animation
+    -- rearrange to remove nil values, 2.0 doesn't like it.
+    local sorted_animations = { layers = {} }
+    for _, animation in pairs(animations['layers']) do
+        if animation then
+            table.insert(sorted_animations.layers, animation)
+        end
+    end
+
+    return sorted_animations
 end
 
 local subtypes = {
