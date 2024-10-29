@@ -3,19 +3,19 @@
 --- Created by heyqule.
 --- DateTime: 8/10/2023 5:48 PM
 ---
-local AnimationDB = require('__erm_libs__/prototypes/animation_db')
+local AnimationDB = require("__erm_libs__/prototypes/animation_db")
 
 local TeamColorManager = {}
 
 local name_check = function(name, target)
-    local nameToken = util.split(name, '--')
+    local nameToken = util.split(name, "--")
     return nameToken[1] == target
 end
 
 
 function TeamColorManager.change_team_color(target_race, color, disable_mask, preserve_gloss)
 
-    local applicable_entity_types = {'unit','unit-spawner', 'turret', 'explosion', 'corpse'}
+    local applicable_entity_types = {"unit","unit-spawner", "turret", "explosion", "corpse"}
 
     for _, entity_type in pairs(applicable_entity_types) do
         for _, entity in pairs(data.raw[entity_type]) do

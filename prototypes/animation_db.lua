@@ -3,7 +3,7 @@
 --- Created by heyqule.
 --- DateTime: 8/10/2023 12:38 AM
 ---
-require('util')
+require("util")
 local AnimationDB = {}
 
 ---
@@ -29,13 +29,13 @@ function AnimationDB.get_layered_animations(entity_type, name, animation_type, u
     if draw_light then
         local lightLayer = AnimationDB.get_light_mask_animation(entity_type, name, animation_type, unit_scale)
         if lightLayer then
-            table.insert(animations['layers'], lightLayer)
+            table.insert(animations["layers"], lightLayer)
         end
     end
 
-    -- rearrange to remove nil values, 2.0 doesn't like it.
+    -- rearrange to remove nil values, 2.0 doesn"t like it.
     local sorted_animations = { layers = {} }
-    for _, animation in pairs(animations['layers']) do
+    for _, animation in pairs(animations["layers"]) do
         if animation then
             table.insert(sorted_animations.layers, animation)
         end
@@ -68,7 +68,7 @@ local subtypes = {
 --- get single sprite animation from any subtypes
 ---
 function AnimationDB.get_single_animation(entity_type, name, animation_type, subtype, unit_scale)
-    subtype = subtype or 'main'
+    subtype = subtype or "main"
     if subtypes[subtype] then
         local animation = subtypes[subtype](entity_type, name, animation_type, unit_scale)
         return animation
@@ -78,8 +78,8 @@ function AnimationDB.get_single_animation(entity_type, name, animation_type, sub
 end
 
 function AnimationDB.get_main_animation(entity_type, name, animation_type, unit_scale)
-    if AnimationDB.data[entity_type][name][animation_type]['main'] then
-        local animation = util.table.deepcopy(AnimationDB.data[entity_type][name][animation_type]['main'])
+    if AnimationDB.data[entity_type][name][animation_type]["main"] then
+        local animation = util.table.deepcopy(AnimationDB.data[entity_type][name][animation_type]["main"])
         if unit_scale then
             animation.scale = unit_scale
         end
@@ -88,13 +88,13 @@ function AnimationDB.get_main_animation(entity_type, name, animation_type, unit_
 end
 
 function AnimationDB.get_shadow_animation(entity_type, name, animation_type, unit_scale)
-    if AnimationDB.data[entity_type][name][animation_type]['shadow'] then
-        local animation  = AnimationDB.data[entity_type][name][animation_type]['shadow']
-        if animation['frame_count'] == nil then
+    if AnimationDB.data[entity_type][name][animation_type]["shadow"] then
+        local animation  = AnimationDB.data[entity_type][name][animation_type]["shadow"]
+        if animation["frame_count"] == nil then
             animation = AnimationDB.get_main_animation(entity_type, name, animation_type, unit_scale)
-            animation['shift'] = util.table.deepcopy(AnimationDB.data[entity_type][name][animation_type]['shadow']['shift'])
+            animation["shift"] = util.table.deepcopy(AnimationDB.data[entity_type][name][animation_type]["shadow"]["shift"])
         end
-        animation['draw_as_shadow'] = true
+        animation["draw_as_shadow"] = true
         return animation
     end
 end
@@ -103,9 +103,9 @@ end
 --- Return glow mask
 ---
 function AnimationDB.get_glow_mask_animation(entity_type, name, animation_type, unit_scale)
-    if AnimationDB.data[entity_type][name][animation_type]['glow'] then
-        local animation = util.table.deepcopy(AnimationDB.data[entity_type][name][animation_type]['glow'])
-        animation['draw_as_glow'] = true
+    if AnimationDB.data[entity_type][name][animation_type]["glow"] then
+        local animation = util.table.deepcopy(AnimationDB.data[entity_type][name][animation_type]["glow"])
+        animation["draw_as_glow"] = true
         if unit_scale then
             animation.scale = unit_scale
         end
@@ -117,8 +117,8 @@ end
 --- Return effect mask
 ---
 function AnimationDB.get_effect_mask_animation(entity_type, name, animation_type, unit_scale)
-    if AnimationDB.data[entity_type][name][animation_type]['effect'] then
-        local animation = util.table.deepcopy(AnimationDB.data[entity_type][name][animation_type]['effect'])
+    if AnimationDB.data[entity_type][name][animation_type]["effect"] then
+        local animation = util.table.deepcopy(AnimationDB.data[entity_type][name][animation_type]["effect"])
         if unit_scale then
             animation.scale = unit_scale
         end
@@ -130,12 +130,12 @@ end
 --- Return draw_as_light mask
 ---
 function AnimationDB.get_light_mask_animation(entity_type, name, animation_type, unit_scale)
-    if AnimationDB.data[entity_type][name][animation_type]['light'] then
-        local animation = util.table.deepcopy(AnimationDB.data[entity_type][name][animation_type]['light'])
+    if AnimationDB.data[entity_type][name][animation_type]["light"] then
+        local animation = util.table.deepcopy(AnimationDB.data[entity_type][name][animation_type]["light"])
         if unit_scale then
             animation.scale = unit_scale
         end
-        animation['draw_as_light'] = true
+        animation["draw_as_light"] = true
         return animation
     end
 end
@@ -144,8 +144,8 @@ end
 --- Return color mask for team colors
 ---
 function AnimationDB.get_team_mask_animation(entity_type, name, animation_type, unit_scale)
-    if AnimationDB.data[entity_type][name][animation_type]['team'] then
-        local animation = util.table.deepcopy(AnimationDB.data[entity_type][name][animation_type]['team'])
+    if AnimationDB.data[entity_type][name][animation_type]["team"] then
+        local animation = util.table.deepcopy(AnimationDB.data[entity_type][name][animation_type]["team"])
         if unit_scale then
             animation.scale = unit_scale
         end
@@ -154,17 +154,17 @@ function AnimationDB.get_team_mask_animation(entity_type, name, animation_type, 
 end
 
 function AnimationDB.alter_team_color(animation_data, color, disable_mask, preserve_gloss)
-    if animation_data['layers'] then
-        for index, animation_node in pairs(animation_data['layers']) do
-            if (animation_node.filename and string.find( animation_node.filename, '_teamcolour') ~= nil) or
-                (animation_node.filenames and string.find( animation_node.filenames[1], '_teamcolour') ~= nil) or
-                (animation_node.stripes and string.find( animation_node.stripes[1].filename, '_teamcolour') ~= nil) then
+    if animation_data["layers"] then
+        for index, animation_node in pairs(animation_data["layers"]) do
+            if (animation_node.filename and string.find( animation_node.filename, "_teamcolour") ~= nil) or
+                (animation_node.filenames and string.find( animation_node.filenames[1], "_teamcolour") ~= nil) or
+                (animation_node.stripes and string.find( animation_node.stripes[1].filename, "_teamcolour") ~= nil) then
                 if disable_mask then
-                    animation_data['layers'][index] = nil
+                    animation_data["layers"][index] = nil
                 else
-                    animation_data['layers'][index]['tint'] = color
+                    animation_data["layers"][index]["tint"] = color
                     if preserve_gloss then
-                        animation_data['layers'][index]['blend_mode'] = 'additive-soft'
+                        animation_data["layers"][index]["blend_mode"] = "additive-soft"
                     end
                 end
             end
@@ -178,15 +178,15 @@ end
 --- Toggle whether team color can be apply_runtime_time, only applicable to unit and turret. Does not work on Unit-spawner
 ---
 function AnimationDB.apply_runtime_tint(animation_data, runtime_tint)
-    if animation_data['layers'] then
-        for index, animation_node in pairs(animation_data['layers']) do
-            if (animation_node.filename and string.find( animation_node.filename, '_teamcolour') ~= nil) or
-                (animation_node.filenames and string.find( animation_node.filenames[1], '_teamcolour') ~= nil) or
-                (animation_node.stripes and string.find( animation_node.stripes[1].filename, '_teamcolour') ~= nil) then
+    if animation_data["layers"] then
+        for index, animation_node in pairs(animation_data["layers"]) do
+            if (animation_node.filename and string.find( animation_node.filename, "_teamcolour") ~= nil) or
+                (animation_node.filenames and string.find( animation_node.filenames[1], "_teamcolour") ~= nil) or
+                (animation_node.stripes and string.find( animation_node.stripes[1].filename, "_teamcolour") ~= nil) then
                 if runtime_tint then
-                    animation_data['layers'][index]['apply_runtime_tint'] = true
+                    animation_data["layers"][index]["apply_runtime_tint"] = true
                 else
-                    animation_data['layers'][index]['apply_runtime_tint'] = false
+                    animation_data["layers"][index]["apply_runtime_tint"] = false
                 end
             end
         end
@@ -196,43 +196,43 @@ end
 
 
 function AnimationDB.change_animation_speed(animation_data, speed)
-    if animation_data['layers'] then
-        for index, _ in pairs(animation_data['layers']) do
-            animation_data['layers'][index]['animation_speed'] = speed
+    if animation_data["layers"] then
+        for index, _ in pairs(animation_data["layers"]) do
+            animation_data["layers"][index]["animation_speed"] = speed
         end
-    elseif animation_data['animation_speed'] then
-        animation_data['animation_speed'] = speed
+    elseif animation_data["animation_speed"] then
+        animation_data["animation_speed"] = speed
     end
 
     return animation_data
 end
 
 function AnimationDB.change_frame_count(animation_data, frame_count)
-    if animation_data['layers'] then
-        for index, _ in pairs(animation_data['layers']) do
-            animation_data['layers'][index]['animation_speed'] = frame_count
+    if animation_data["layers"] then
+        for index, _ in pairs(animation_data["layers"]) do
+            animation_data["layers"][index]["animation_speed"] = frame_count
         end
-    elseif animation_data['animation_speed'] then
-        animation_data['animation_speed'] = frame_count
+    elseif animation_data["animation_speed"] then
+        animation_data["animation_speed"] = frame_count
     end
 
     return animation_data
 end
 
 function AnimationDB.change_scale(animation_data, unit_scale, relative_scale)
-    if animation_data['layers'] then
-        for index, _ in pairs(animation_data['layers']) do
-            if relative_scale and animation_data['layers'][index]['scale'] then
-                animation_data['layers'][index]['scale'] = animation_data['layers'][index]['scale'] * unit_scale
+    if animation_data["layers"] then
+        for index, _ in pairs(animation_data["layers"]) do
+            if relative_scale and animation_data["layers"][index]["scale"] then
+                animation_data["layers"][index]["scale"] = animation_data["layers"][index]["scale"] * unit_scale
             else
-                animation_data['layers'][index]['scale'] = unit_scale
+                animation_data["layers"][index]["scale"] = unit_scale
             end
         end
-    elseif animation_data['scale'] then
-        if relative_scale and animation_data['scale'] then
-            animation_data['scale'] = animation_data['scale'] * unit_scale
+    elseif animation_data["scale"] then
+        if relative_scale and animation_data["scale"] then
+            animation_data["scale"] = animation_data["scale"] * unit_scale
         else
-            animation_data['scale'] = unit_scale
+            animation_data["scale"] = unit_scale
         end
     end
 
@@ -249,12 +249,12 @@ local adjust_shift = function(shift, new_shift)
 end
 
 function AnimationDB.shift(animation_data, shift_vector)
-    if animation_data['layers'] then
-        for index, _ in pairs(animation_data['layers']) do
-            animation_data['layers'][index]['shift'] = adjust_shift(animation_data['layers'][index]['shift'], shift_vector)
+    if animation_data["layers"] then
+        for index, _ in pairs(animation_data["layers"]) do
+            animation_data["layers"][index]["shift"] = adjust_shift(animation_data["layers"][index]["shift"], shift_vector)
         end
-    elseif animation_data['animation_speed'] then
-        animation_data['shift'] = adjust_shift(animation_data['shift'], shift_vector)
+    elseif animation_data["animation_speed"] then
+        animation_data["shift"] = adjust_shift(animation_data["shift"], shift_vector)
     end
 
     return animation_data;
