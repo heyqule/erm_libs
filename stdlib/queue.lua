@@ -10,7 +10,6 @@
 
 local Queue = {
     __class = 'Queue',
-    __index = require('__stdlib__/stdlib/core')
 }
 setmetatable(Queue, Queue)
 
