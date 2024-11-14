@@ -8,8 +8,10 @@ local AsteroidTriggers = {}
 
 AsteroidTriggers.add_unit_to_asteroid = function(asteroid, race, unit_name, tier, probability)
     local new_trigger = {
+        type = "create-entity",
         entity_name = race .. '--' .. unit_name .. '--' .. tier,
         probability = probability,
+        trigger_created_entity = true,
         offset_deviation = {
             {
                 -0.5,
@@ -22,19 +24,10 @@ AsteroidTriggers.add_unit_to_asteroid = function(asteroid, race, unit_name, tier
         },
         offsets = {
             {
-                -0.5,
-                -0.125
-            },
-            {
                 0,
                 -0.25
             },
-            {
-                0.5,
-                -0.125
-            }
-        },
-        type = "create-entity"
+        }
     }
     table.insert(asteroid.dying_trigger_effect, new_trigger)
 end
