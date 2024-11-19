@@ -6,7 +6,7 @@
 
 local AsteroidTriggers = {}
 
-AsteroidTriggers.add_unit_to_asteroid = function(asteroid, race, unit_name, tier, probability)
+function AsteroidTriggers.add_unit_to_asteroid(asteroid, race, unit_name, tier, probability)
     local new_trigger = {
         type = "create-entity",
         entity_name = race .. '--' .. unit_name .. '--' .. tier,

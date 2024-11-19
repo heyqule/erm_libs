@@ -4,6 +4,9 @@ Date: ????-??-??
 
   Features:
     - Update to Factorio 2.0
+    - Refactored some stdlib files for ERM use (https://mods.factorio.com/mod/stdlib)
+    - Added asteroid_trigger to add unit spawning when breaking asteroid.
+    - Added sound_util as helper for sharing sound settings.
 
   Changes:
     - Re-sort animations to remove nil value on certain functions. 2.0 does not like it.
