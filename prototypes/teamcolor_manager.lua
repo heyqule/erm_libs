@@ -4,11 +4,12 @@
 --- DateTime: 8/10/2023 5:48 PM
 ---
 local AnimationDB = require("__erm_libs__/prototypes/animation_db")
+local String = require('__erm_libs__/stdlib/string')
 
 local TeamColorManager = {}
 
 local name_check = function(name, target)
-    local nameToken = util.split(name, "--")
+    local nameToken = String.split(name, "--")
     return nameToken[1] == target
 end
 

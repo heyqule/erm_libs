@@ -7,6 +7,7 @@
   "description": "Sharable functions for enemy race manager packages",
   "factorio_version": "2.0",
   "dependencies": [
-    "base >= 2.0.0"
+    "base >= 2.0.0",
+    "?space-age >= 2.0.0"
   ]
 }

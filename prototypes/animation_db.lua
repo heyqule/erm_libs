@@ -6,6 +6,18 @@
 require("util")
 local AnimationDB = {}
 
+-- rearrange to remove nil values, 2.0 doesn'"'t like it.
+local rearrange_animations = function(animations)
+    local sorted_animations = { layers = {} }
+    for _, animation in pairs(animations["layers"]) do
+        if animation then
+            table.insert(sorted_animations.layers, animation)
+        end
+    end
+
+    return sorted_animations
+end
+
 ---
 --- @see https://github.com/heyqule/erm_zerg_hd_assets/blob/master/animation_db.lua for example
 AnimationDB.data = {}
@@ -33,15 +45,7 @@ function AnimationDB.get_layered_animations(entity_type, name, animation_type, u
         end
     end
 
-    -- rearrange to remove nil values, 2.0 doesn"t like it.
-    local sorted_animations = { layers = {} }
-    for _, animation in pairs(animations["layers"]) do
-        if animation then
-            table.insert(sorted_animations.layers, animation)
-        end
-    end
-
-    return sorted_animations
+    return rearrange_animations(animations)
 end
 
 local subtypes = {
@@ -169,6 +173,8 @@ function AnimationDB.alter_team_color(animation_data, color, disable_mask, prese
                 end
             end
         end
+
+        animation_data = rearrange_animations(animation_data)
     end
 
     return animation_data
