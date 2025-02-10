@@ -23,5 +23,46 @@ MapGenFunctions.remove_enemy_autoplace_controls = function(autoplace_controls)
     end
 end
 
+MapGenFunctions.autoplace_is_enemy_base = function(name)
+    return string.find(name, "enemy_base", 1, true) or string.find(name,"enemy-base", 1, true)
+end
+
+MapGenFunctions.has_enemy_autoplace = function(prototype)
+    if prototype.map_gen_settings.autoplace_controls then
+        for name, autoplace_control in pairs(prototype.map_gen_settings.autoplace_controls) do
+            if MapGenFunctions.autoplace_is_enemy_base(name) then
+                return true
+            end
+        end
+    end
+    
+    return false;
+end
+
+---
+--- prototype - planet prototype
+---
+MapGenFunctions.get_enemy_autoplaces = function(prototype)
+    local enemy_autoplaces = {}
+    if prototype.map_gen_settings.autoplace_controls then
+        for name, autoplace_control in pairs(prototype.map_gen_settings.autoplace_controls) do
+            if MapGenFunctions.autoplace_is_enemy_base(name) then
+                table.insert(enemy_autoplaces, name)
+            end
+        end
+    end
+    return enemy_autoplaces
+end
+
+---
+--- prototype - planet prototype
+---
+MapGenFunctions.territory_units = function(prototype)
+    if prototype.map_gen_settings.territory_settings then
+        return prototype.map_gen_settings.territory_settings.units
+    end
+    return nil
+end
+
 
 return MapGenFunctions
