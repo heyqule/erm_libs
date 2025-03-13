@@ -28,7 +28,7 @@ MapGenFunctions.autoplace_is_enemy_base = function(name)
 end
 
 MapGenFunctions.has_enemy_autoplace = function(prototype)
-    if prototype.map_gen_settings.autoplace_controls then
+    if prototype.map_gen_settings and prototype.map_gen_settings.autoplace_controls then
         for name, autoplace_control in pairs(prototype.map_gen_settings.autoplace_controls) do
             if MapGenFunctions.autoplace_is_enemy_base(name) then
                 return true
@@ -44,7 +44,7 @@ end
 ---
 MapGenFunctions.get_enemy_autoplaces = function(prototype)
     local enemy_autoplaces = {}
-    if prototype.map_gen_settings.autoplace_controls then
+    if prototype.map_gen_settings and prototype.map_gen_settings.autoplace_controls then
         for name, autoplace_control in pairs(prototype.map_gen_settings.autoplace_controls) do
             if MapGenFunctions.autoplace_is_enemy_base(name) then
                 table.insert(enemy_autoplaces, name)
@@ -58,7 +58,7 @@ end
 --- prototype - planet prototype
 ---
 MapGenFunctions.territory_units = function(prototype)
-    if prototype.map_gen_settings.territory_settings then
+    if prototype.map_gen_settings and prototype.map_gen_settings.territory_settings then
         return prototype.map_gen_settings.territory_settings.units
     end
     return nil

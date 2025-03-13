@@ -1,4 +1,15 @@
 ---------------------------------------------------------------------------------------------------
+Version: 2.0.3
+Date: 2025-03-13
+
+  Changes:
+    - Added a helper to add army economy prototypes.
+    - Added a helper to add fusion assembling machine prototypes. 
+    
+  Bugfixes:
+    - Fix a start-up crash when other mods removes map_gen_settings from base game planets. 
+
+---------------------------------------------------------------------------------------------------
 Version: 2.0.2
 Date: 2025-02-21
 
