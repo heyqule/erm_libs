@@ -25,4 +25,13 @@ function String.split(s, sep, pattern)
     return fields
 end
 
+function String.trim(s)
+    return (s:gsub([[^%s*(.-)%s*$]], '%1'))
+end
+
+
+function String.starts_with(s, start)
+    return s:find(start, 1, true) == 1
+end
+
 return String
