@@ -1,9 +1,13 @@
 ---------------------------------------------------------------------------------------------------
-Version: 2.0.5
+Version: 2.0.6
 Date: 2025-??-??
   
   Changes:
     - Add helper to add PSI radars for boss mode.
+    - Updated stdlib/direction class
+    
+  Bugfixes:
+    - Fix nil handling for MapGenFunctions.remove_enemy_autoplace_controls()    
 
 ---------------------------------------------------------------------------------------------------
 Version: 2.0.5

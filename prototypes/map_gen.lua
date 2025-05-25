@@ -13,6 +13,10 @@ local exclude_autoplace = {
 }
 
 MapGenFunctions.remove_enemy_autoplace_controls = function(autoplace_controls)
+    if autoplace_controls == nil then
+        return
+    end
+    
     for key, _ in pairs(autoplace_controls) do
         if string.find(key,"enemy_base", nil, true) or 
            string.find(key,"enemy-base", nil, true) or
