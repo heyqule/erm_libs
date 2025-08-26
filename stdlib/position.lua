@@ -807,6 +807,27 @@ function Position.orientation_to(pos1, pos2)
     return (1 - (Position.atan2(pos1, pos2) / pi)) / 2
 end
 
+--- Returns the direction to a position.
+-- @tparam Concepts.Position pos1
+-- @tparam Concepts.Position pos2
+-- @tparam int offset number of tiles
+function Position.get_offset_position(pos1, pos2, offset)
+    -- Calculate distance between positions
+    local distance = Position.distance(pos1, pos2)
+
+    -- If distance is less than 5, return target position
+    if distance <= 5 then
+        return Position.new(pos1)
+    end
+
+    -- Use lerp to get position 5 tiles toward target
+    -- Alpha represents how far along the line we want to go (5 tiles out of total distance)
+    local alpha = offset / distance
+    local offset_position = Position.lerp(pos1, pos2, alpha)
+
+    return offset_position
+end
+
 
 --- Metamethods
 -- @section Metamethods
