@@ -92,31 +92,6 @@ local function generate_wide_path(start_chunk, end_chunk, path_width, seen, chun
     end
 end
 
---- Create an L-shaped territory
--- @tparam table corner_position The corner position of the L shape
--- @tparam table horizontal_end_position The end position of the horizontal part of the L
--- @tparam table vertical_end_position The end position of the vertical part of the L
--- @tparam number path_width Width of the path in chunks
--- @treturn table Array of chunk positions representing the L-shaped territory
-function Territory.compute_L_shape(corner_position, path_width)
-    local direction = Direction.which_area(corner_position)
-    local chunks = {}
-    local seen = {}
-
-    -- Convert positions to chunk positions
-    local corner_chunk = Position.to_chunk_position(corner_position)
-    local h_end_chunk = Position.to_chunk_position(horizontal_end_position)
-    local v_end_chunk = Position.to_chunk_position(vertical_end_position)
-
-    -- Generate horizontal part of the L
-    generate_wide_path(corner_chunk, h_end_chunk, path_width, seen, chunks)
-
-    -- Generate vertical part of the L
-    generate_wide_path(corner_chunk, v_end_chunk, path_width, seen, chunks)
-
-    return chunks
-end
-
 --- Compute a dynamic width chunk path array from position A to position B
 -- @tparam table pos_a Starting position
 -- @tparam table pos_b Ending position

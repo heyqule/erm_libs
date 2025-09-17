@@ -4,9 +4,10 @@ Date: 2025-??-??
   
   Scripting:
     - Added helper to add PSI radars for boss mode.
-    - Added get_offset_position(pos1, pos2, offset) to find an offset location based on distance.
-    - Added which_area(position) and direction value mappings to stdlib/direction class.
+    - Added Position.get_offset_position(pos1, pos2, offset) to find an offset location based on distance.
+    - Added Direction.which_area(position) and direction value mappings to stdlib/direction class.
     - Added stdlib/territory class for territory controls.
+    - Added Position.calculate_position_x_tiles_further(position)
     
   Bugfixes:
     - Fix nil handling for MapGenFunctions.remove_enemy_autoplace_controls()    
