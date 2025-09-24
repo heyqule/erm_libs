@@ -807,7 +807,7 @@ function Position.orientation_to(pos1, pos2)
     return (1 - (Position.atan2(pos1, pos2) / pi)) / 2
 end
 
---- Returns the direction to a position.
+--- Returns the offset position from pos1 to pos2
 -- @tparam Concepts.Position pos1
 -- @tparam Concepts.Position pos2
 -- @tparam int offset number of tiles

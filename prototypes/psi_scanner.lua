@@ -127,7 +127,7 @@ function PsiScanner.make_item(prefix, icons)
         type = "item",
         name = prefix.."--psi-radar",
         icons = icons,
-        subgroup = "defensive-structure",
+        subgroup = "boss_radar",
         order = "m["..prefix.."--psi-radar]",
         place_result = prefix.."--psi-radar",
         stack_size = 1,
