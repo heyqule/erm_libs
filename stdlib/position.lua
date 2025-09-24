@@ -807,6 +807,62 @@ function Position.orientation_to(pos1, pos2)
     return (1 - (Position.atan2(pos1, pos2) / pi)) / 2
 end
 
+--- Returns the offset position from pos1 to pos2
+-- @tparam Concepts.Position pos1
+-- @tparam Concepts.Position pos2
+-- @tparam int offset number of tiles
+-- Qwen3-coder
+function Position.get_offset_position(pos1, pos2, offset)
+    -- Calculate distance between positions
+    local distance = Position.distance(pos1, pos2)
+
+    -- If distance is less than 5, return target position
+    if distance <= 5 then
+        return Position.new(pos1)
+    end
+
+    -- Use lerp to get position 5 tiles toward target
+    -- Alpha represents how far along the line we want to go (5 tiles out of total distance)
+    local alpha = offset / distance
+    local offset_position = Position.lerp(pos1, pos2, alpha)
+
+    return offset_position
+end
+
+-- Function to calculate a position x tiles further from {0,0} than beacon.position
+-- Qwen3-coder
+function Position.calculate_position_x_tiles_further(position, tiles)
+    tiles = tiles or 32
+    -- Calculate the vector from {0,0} to beacon_position
+    local vector_x = position.x
+    local vector_y = position.y
+
+    -- Calculate the distance from {0,0} to beacon_position
+    local distance = math.sqrt(vector_x * vector_x + vector_y * vector_y)
+
+    -- Handle the special case where beacon is at {0,0}
+    if distance == 0 then
+        -- Default to moving x tiles in the x direction
+        return nil
+    end
+
+    -- Normalize the vector
+    local unit_vector_x = vector_x / distance
+    local unit_vector_y = vector_y / distance
+
+    -- Scale the unit vector by tiles
+    local extension_x = unit_vector_x * tiles
+    local extension_y = unit_vector_y * tiles
+
+    -- Add the extension to the beacon position
+    local new_position = {
+        x = position.x + extension_x,
+        y = position.y + extension_y
+    }
+
+    return new_position
+end
+
 
 --- Metamethods
 -- @section Metamethods

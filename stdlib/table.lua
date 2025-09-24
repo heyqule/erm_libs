@@ -6,6 +6,8 @@
 
 local Table = {}
 
+for k, v in pairs(table) do if not Table[k] then Table[k] = v end end
+
 function Table.keys(tbl, sorted, as_string)
     if not tbl then return {} end
     local key_set = {}
@@ -57,6 +59,18 @@ end
 
 function Table.unique_values(tbl)
     return Table.keys(Table.invert(tbl))
+end
+
+function Table.flatten(tbl)
+    local flattened = {}
+    for _, value in pairs(tbl) do
+        if type(value) == 'table' then
+            flattened = Table.array_combine(flattened, Table.flatten(value))
+        else
+            table.insert(flattened, value)
+        end
+    end
+    return flattened
 end
 
 return Table

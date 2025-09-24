@@ -21,7 +21,6 @@ function SoundUtil.dupe_planet_music(planet_name, new_planet_name)
     local sound_list = {}
     local index = 1
     for _, sound in pairs(data.raw['ambient-sound']) do
-        print(sound)
         if sound['planet'] == planet_name then
             local new_sound = util.table.deepcopy(sound)
             new_sound.name = new_planet_name .. '-' .. index
@@ -30,7 +29,6 @@ function SoundUtil.dupe_planet_music(planet_name, new_planet_name)
             index = index + 1
         end
     end
-    print(serpent.block(sound_list))
     return sound_list
 end
 
