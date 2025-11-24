@@ -7,15 +7,24 @@
 local ArmyEconomyHelper = {}
 
 function ArmyEconomyHelper.create_item (options)
-    data:extend({{
-        type = "item",
-        name = options["prefix"] .. "--controllable--" .. options["name"],
+    local icons
+    if options["icon"] then
         icons = {
             {
                 icon = options["icon"],
                 icon_size = 64,
-            },
-        },
+            }
+        }
+    elseif options["icons"] then
+        icons = options["icons"]
+    else
+        error('ArmyEconomyHelper.create_item: icon or icons required')
+    end
+    
+    data:extend({{
+        type = "item",
+        name = options["prefix"] .. "--controllable--" .. options["name"],
+        icons = icons,
         subgroup = options["subgroup"],
         order = options["prefix"] .. "--controllable--" .. options["name"],
         place_result = options["prefix"] .. "--controllable--" .. options["name"],
@@ -44,22 +53,32 @@ function ArmyEconomyHelper.create_recipe (options)
 end
 
 function ArmyEconomyHelper.create_deploy_recipe(options)
+    local icons
+    if options["icon"] then
+        icons = {
+            {
+                icon = options["icon"],
+                icon_size = 64,
+            }
+        }
+    elseif options["icons"] then
+        icons = options["icons"]
+    else
+        error('ArmyEconomyHelper.create_item: icon or icons required')
+    end
+    
+    table.insert(icons,                          {
+        icon = "__base__/graphics/icons/signal/signal_D.png",
+        icon_size = 64,
+        scale = 0.25,
+        shift = { 9, 9 }
+    })
+    
     data:extend({{
                      type = "recipe",
                      name = 'zdeploy-'..options["prefix"] .. "--controllable--" .. options["name"],
                      enabled = true,
-                     icons = {
-                         {
-                             icon = options["icon"],
-                             icon_size = 64,
-                         },
-                         {
-                             icon = "__base__/graphics/icons/signal/signal_D.png",
-                             icon_size = 64,
-                             scale = 0.25,
-                             shift = { 9, 9 }
-                         },
-                     },
+                     icons = icons,
                      energy_required = 3,
                      ingredients = {
                          {type="item", name=options["prefix"] .. "--controllable--" .. options["name"], amount=1},

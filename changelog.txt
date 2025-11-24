@@ -1,4 +1,14 @@
 ---------------------------------------------------------------------------------------------------
+Version: 2.0.7
+Date: 2025-11-24
+  
+  Scripting:
+    - Moved human_animation.lua from red-army to erm_lib.
+
+  Changes:
+    - Changed icon handling to accept "icons" option in army_economy_helper functions
+
+---------------------------------------------------------------------------------------------------
 Version: 2.0.6
 Date: 2025-09-24
 
