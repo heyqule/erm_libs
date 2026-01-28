@@ -10,7 +10,36 @@ local PsiScanner = {}
 ---
 --- PSI radar to scan boss on their home planet
 ---
-function PsiScanner.make_entity(prefix, icons, surface_conditions)
+function PsiScanner.make_entity(prefix, icons, surface_conditions, animations)
+    animations = animations or {
+        layers =
+        {
+            {
+                filename = "__base__/graphics/entity/radar/radar.png",
+                priority = "low",
+                width = 196,
+                height = 254,
+                apply_projection = false,
+                direction_count = 64,
+                line_length = 8,
+                shift = util.by_pixel(1.0, -16.0),
+                scale = 0.5
+            },
+            {
+                filename = "__base__/graphics/entity/radar/radar-shadow.png",
+                priority = "low",
+                width = 336,
+                height = 170,
+                apply_projection = false,
+                direction_count = 64,
+                line_length = 8,
+                shift = util.by_pixel(39.0, 6.0),
+                draw_as_shadow = true,
+                scale = 0.5
+            }
+        }
+    }
+    
     local psi_scanner_entity = 
     {
         type = "radar",
@@ -57,35 +86,7 @@ function PsiScanner.make_entity(prefix, icons, surface_conditions)
             shift = util.by_pixel(1.5, 4.0),
             scale = 0.5
         },
-        pictures =
-        {
-            layers =
-            {
-                {
-                    filename = "__base__/graphics/entity/radar/radar.png",
-                    priority = "low",
-                    width = 196,
-                    height = 254,
-                    apply_projection = false,
-                    direction_count = 64,
-                    line_length = 8,
-                    shift = util.by_pixel(1.0, -16.0),
-                    scale = 0.5
-                },
-                {
-                    filename = "__base__/graphics/entity/radar/radar-shadow.png",
-                    priority = "low",
-                    width = 336,
-                    height = 170,
-                    apply_projection = false,
-                    direction_count = 64,
-                    line_length = 8,
-                    shift = util.by_pixel(39.0, 6.0),
-                    draw_as_shadow = true,
-                    scale = 0.5
-                }
-            }
-        },
+        pictures = animations,
         impact_category = "metal",
         working_sound =
         {
