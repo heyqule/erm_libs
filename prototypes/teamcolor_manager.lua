@@ -51,6 +51,12 @@ function TeamColorManager.change_team_color(target_race, color, disable_mask, pr
                 if entity.starting_attack_animation then
                     entity.starting_attack_animation = AnimationDB.alter_team_color(entity.starting_attack_animation, color, disable_mask, preserve_gloss)
                 end
+                if entity.attacking_animation then
+                    entity.attacking_animation = AnimationDB.alter_team_color(entity.attacking_animation, color, disable_mask, preserve_gloss)
+                end
+                if entity.ending_attack_animation then
+                    entity.ending_attack_animation = AnimationDB.alter_team_color(entity.ending_attack_animation, color, disable_mask, preserve_gloss)
+                end
             end
         end
     end
