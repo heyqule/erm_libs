@@ -146,7 +146,7 @@ function PsiScanner.make_recipe(prefix, ingredients)
         name = prefix.."--psi-radar",
         energy_required = 10,
         enabled = false,
-        category = "crafting",
+        categories = {"crafting"},
         ingredients = ingredients,
         results = {
             {type="item", name=prefix.."--psi-radar", amount=1},
