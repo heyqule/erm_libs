@@ -40,7 +40,7 @@ function ArmyEconomyHelper.create_recipe (options)
         enabled = false,
         energy_required = options["energy_required"],
         ingredients = options["ingredients"],
-        category = options["category"],
+        categories = options["categories"],
         allow_as_intermediate = false,
         always_show_made_in = true,
         order = 'z--'..options["prefix"] .. "--controllable--" .. options["name"],
@@ -83,7 +83,7 @@ function ArmyEconomyHelper.create_deploy_recipe(options)
                      ingredients = {
                          {type="item", name=options["prefix"] .. "--controllable--" .. options["name"], amount=1},
                      },
-                     category = options["category"],
+                     categories = options["categories"],
                      allow_as_intermediate = false,
                      always_show_made_in = false,
                      order = 'zdeploy-'..options["prefix"] .. "--controllable--" .. options["name"],
