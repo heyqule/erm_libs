@@ -23,32 +23,5 @@ function AIHelper.get_controllable_unit_setting(group_size)
     }
 end
 
----
---- Unit's steering setting.  When an unit doesn't set steering, the default is stay = 1.2, move = 3
----
-function AIHelper.get_steering_setting(move_radius, stay_radius)
-    return {
-        move = {
-            radius = move_radius
-        },
-        stay = {
-            radius = stay_radius
-        }
-    }
-end
-
-function AIHelper.get_player_steering_setting(move_radius, stay_radius)
-    return {
-        move = {
-            ---used in previous unit control for performance enhancement.
-            force_unit_fuzzy_goto_behavior = true,
-            radius = move_radius
-        },
-        stay = {
-            force_unit_fuzzy_goto_behavior = false,
-            radius = stay_radius
-        }
-    }
-end
 
 return AIHelper

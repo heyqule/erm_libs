@@ -7,7 +7,7 @@
 local HumanAnimation = {}
 
 HumanAnimation.get_animation = function()
-    return  {
+    local animation = {
         animations = {
             {
                 idle =
@@ -207,6 +207,8 @@ HumanAnimation.get_animation = function()
             }
         }
     }
+    
+    return util.table.deepcopy(animation)
 end
 
 return HumanAnimation;
