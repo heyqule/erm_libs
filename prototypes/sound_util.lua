@@ -19,9 +19,12 @@ end
 
 function SoundUtil.dupe_planet_music(planet_name, new_planet_name)
     for _, sound in pairs(data.raw['ambient-sound']) do
-        for _, pname in pairs(sound.planets) do
-            if pname == planet_name then
-                table.insert(sound.planets, new_planet_name)
+        if sound.planets then
+            for _, pname in pairs(sound.planets) do
+                if pname == planet_name then
+                    table.insert(sound.planets, new_planet_name)
+                    break
+                end
             end 
         end
     end
