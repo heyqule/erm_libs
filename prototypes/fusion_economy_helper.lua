@@ -13,6 +13,7 @@ local function create_entity()
     fusion_plant.minable = { mining_time = 0.2, result = "fusion-assembling-machine" }
     fusion_plant.module_slots = 3
     fusion_plant.allowed_effects = { "consumption", "speed", "productivity", "pollution", "quality" }
+    fusion_plant.subgroup = 'production-machine'
     fusion_plant.energy_source = {
         type = "electric",
         usage_priority = "secondary-input",
@@ -615,6 +616,7 @@ local function create_item()
     local fusion_plant = util.table.deepcopy(data.raw['item']['fusion-generator'])
     fusion_plant.name = "fusion-assembling-machine"
     fusion_plant.place_result = "fusion-assembling-machine"
+    fusion_plant.subgroup = 'production-machine'
 
     data:extend({ fusion_plant })
 end
