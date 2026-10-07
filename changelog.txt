@@ -1,6 +1,6 @@
 ---------------------------------------------------------------------------------------------------
 Version: 2.1.4
-Date: 2026-0?-??
+Date: 2026-09-22
 
   Changes:
     - Fixed additional function assembling machine prototypes to use "production-machine" subgroup.
